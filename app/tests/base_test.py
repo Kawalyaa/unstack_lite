@@ -32,6 +32,10 @@ class BaseTest(unittest.TestCase):
             "description": "is Tesla model y an SUV?",
             "created_by": "Kawalyaa"
         }
+        self.answer = {
+            "description": "Yes model Y is an SUV",
+            "answered_by": "Kelly"
+        }
 
     def tearDown(self):
         pass
@@ -62,6 +66,10 @@ class BaseTest(unittest.TestCase):
 
     def delete_one(self):
         res = self.client.delete(path="/api/v1/questions/delete/1", content_type='application/json')
+        return res
+
+    def post_answer(self):
+        res = self.client.post(path="/api/v1/answers/1", data=json.dumps(self.answer), content_type="application/json")
         return res
 
 

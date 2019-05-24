@@ -55,3 +55,8 @@ class QuestionModel:
             if question["question_id"] == question_id:
                 self.db.remove(question)
                 return "question with id {} is deleted".format(question_id)
+
+    def get_qtn_by_id(self, question_id):
+        for aqtn in self.db:
+            if aqtn["question_id"] == question_id:
+                return "The question exists"
