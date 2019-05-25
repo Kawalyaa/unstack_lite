@@ -62,3 +62,9 @@ class AnswerModel:
         for answer in self.second_db:
             if answer["question_id"] == question_id:
                 return answer
+
+    def delete_qtn_and_ans(self, question_id):
+        for answer in self.second_db:
+            if answer["question_id"] == question_id:
+                self.second_db.remove(answer)
+                return "answer deleted"

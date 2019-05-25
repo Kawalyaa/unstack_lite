@@ -106,6 +106,22 @@ class BaseTest(unittest.TestCase):
         res = self.client.put(path="/api/v1/vote/answer/1", data=json.dumps(self.vote2), content_type="application/json")
         return res
 
+    def get_qtn_and_ans(self):
+        res = self.client.get(path="/api/v1/question/answer/1", content_type="application/json")
+        return res
+
+    def get_missing_qtn_and_ans(self):
+        res = self.client.get(path="/api/v1/question/answer/2", content_type="application/json")
+        return res
+
+    def delete_qtn_and_ans(self):
+        res = self.client.delete(path="/api/v1/delete/question/answer/1", content_type="application/json")
+        return res
+
+    def delete_missing_qtn_and_ans(self):
+        res = self.client.delete(path="/api/v1/delete/question/answer/2", content_type="application/json")
+        return res
+
 
 if __name__ == '__main__':
     unittest.main()

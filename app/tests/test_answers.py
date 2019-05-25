@@ -60,3 +60,30 @@ class TestAnswers(BaseTest):
         res = self.wrong_voter()
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.json["message"], "invalid voting, vote should be either (1 or -1)")
+
+    def test_get_question_and_answer(self):
+        self.post_question()
+        self.post_answer()
+        res = self.get_qtn_and_ans()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json["message"], "ok")
+
+    def test_get_missing_question_and_answer(self):
+        self.post_question()
+        self.post_answer()
+        res = self.get_missing_qtn_and_ans()
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(res.json["message"], "The question and answer with question id 2 is not found")
+
+    def test_delete_question_and_answer(self):
+        self.post_question()
+        self.post_answer()
+        res = self.delete_qtn_and_ans()
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.json["description"], "The question and answer with question_id 1 is deleted")
+
+    def test_delete_missing_question_and_answer(self):
+        self.post_question()
+        self.post_answer()
+        res = self.delete_missing_qtn_and_ans()
+        self.assertEqual(res.status_code, 404)
