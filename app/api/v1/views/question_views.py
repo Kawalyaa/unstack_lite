@@ -7,6 +7,7 @@ question = Blueprint('question', __name__, url_prefix='/api/v1')
 
 @question.route('/questions', methods=['POST'])
 def post_question():
+    """endpoint for posting a question"""
     req = request.get_json()
     title = req['title']
     description = req['description']
@@ -37,6 +38,7 @@ def post_question():
 
 @question.route("/questions", methods=['GET'])
 def get_all_quetions():
+    """endpoint for geting all questions from database"""
     data = QuestionModel()
     res = data.get_all_qtn()
     if len(res) is 0:
@@ -53,6 +55,7 @@ def get_all_quetions():
 
 @question.route("/questions/one/<int:question_id>", methods=['GET'])
 def geta_one_question(question_id):
+    """endpoint for geting one question"""
     data = QuestionModel().get_one_qtn(question_id)
     if data:
         return make_response(jsonify({
@@ -65,6 +68,7 @@ def geta_one_question(question_id):
 
 @question.route("/questions/edit/<int:question_id>", methods=['PUT'])
 def update_question(question_id):
+    """endpoint for editing a question"""
     new = QuestionModel().edit_qtn(question_id)
     if new:
         return make_response(jsonify({
@@ -77,6 +81,7 @@ def update_question(question_id):
 
 @question.route("/questions/delete/<int:question_id>", methods=['DELETE'])
 def delete_question(question_id):
+    """endpoint for deleting aquestion"""
     deleted = QuestionModel().delete(question_id)
     if deleted:
         return make_response(jsonify({
