@@ -60,3 +60,8 @@ class QuestionModel:
         for aqtn in self.db:
             if aqtn["question_id"] == question_id:
                 return "The question exists"
+
+    def check_name(self, question_id, created_by):
+        for question in self.db:
+            if question["created_by"] == created_by and question["question_id"] == question_id:
+                return "The id  and name exists"
