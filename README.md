@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Kawalyaa/unstack_lite.svg?branch=develop)](https://travis-ci.org/Kawalyaa/unstack_lite)  [![Coverage Status](https://coveralls.io/repos/github/Kawalyaa/unstack_lite/badge.svg)](https://coveralls.io/github/Kawalyaa/unstack_lite)  [![Maintainability](https://api.codeclimate.com/v1/badges/d417da464cf04677652b/maintainability)](https://codeclimate.com/github/Kawalyaa/unstack_lite/maintainability)
+[![Build Status](https://travis-ci.org/Kawalyaa/unstack_lite.svg?branch=develop)](https://travis-ci.org/Kawalyaa/unstack_lite)  [![Coverage Status](https://coveralls.io/repos/github/Kawalyaa/unstack_lite/badge.svg?branch=develop)](https://coveralls.io/github/Kawalyaa/unstack_lite?branch=develop)  [![Maintainability](https://api.codeclimate.com/v1/badges/d417da464cf04677652b/maintainability)](https://codeclimate.com/github/Kawalyaa/unstack_lite/maintainability)
 
 # UNSTACK_LITE
 
