@@ -9,7 +9,7 @@ install:
 
 
 script:
-  - nosetests -v app/tests
+  - nosetests --with-coverage --cover-package=app app/tests
 
 after_success:
   - coveralls
