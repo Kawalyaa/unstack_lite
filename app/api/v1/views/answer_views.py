@@ -74,13 +74,13 @@ def set_user_preffered(answer_id, question_id, created_by):
 def vote_answer(answer_id):
     """endpoint for voting the answer"""
     voter = AnswerModel().vote(answer_id)
-    if voter == "bad vote":
-        return jsonify({"message": "invalid voting, vote should be either (1 or -1)"}), 400
+    if voter:
+        return make_response(jsonify({
+            "message": "Answer voted successful",
+            "answer": voter
+        }), 200)
 
-    return make_response(jsonify({
-        "message": "Answer voted successful",
-        "answer": voter
-    }), 200)
+    return jsonify({"message": "invalid voting, vote should be either (1 or -1)"}), 400
 
 
 @answer.route("/question/answer/<int:question_id>", methods=['GET'])

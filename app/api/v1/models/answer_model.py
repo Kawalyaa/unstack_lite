@@ -43,13 +43,21 @@ class AnswerModel:
                 answer["user_preffered"] = True
                 return answer
 
+    # def vote(self, answer_id):
+    #    req = request.get_json()
+    #    for answer in self.second_db:
+    #        if answer["answer_id"] == answer_id:
+    #            reque = req["votes"]
+    #            if reque not in [1, -1]:
+    #                return "bad vote"
+    #            answer["votes"] += reque
+    #            return answer
+
     def vote(self, answer_id):
         req = request.get_json()
         for answer in self.second_db:
-            if answer["answer_id"] == answer_id:
-                reque = req["votes"]
-                if reque not in [1, -1]:
-                    return "bad vote"
+            reque = req["votes"]
+            if answer["answer_id"] == answer_id and reque in [1, -1]:
                 answer["votes"] += reque
                 return answer
 
