@@ -83,7 +83,6 @@ def update_question(question_id):
 @question.route("/questions/delete/<int:question_id>", methods=['DELETE'])
 def delete_question(question_id):
     """endpoint for deleting aquestion"""
-    # deleted = QuestionModel().delete(question_id)
     deleted = [x for x in my_db if x["question_id"] == question_id]
     msg = "question with id {} is deleted".format(question_id)
     if deleted:
