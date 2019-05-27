@@ -57,14 +57,14 @@ def get_all_quetions():
 @question.route("/questions/one/<int:question_id>", methods=['GET'])
 def geta_one_question(question_id):
     """endpoint for geting one question"""
-    data = QuestionModel().get_one_qtn(question_id)
-    if data:
-        return make_response(jsonify({
-            "message": "ok",
-            "question": data
-        }), 200)
-    message = "question with id {} is not found".format(question_id)
-    return jsonify({"message": message}), 404
+    data = [question for question in my_db if question["question_id"] == question_id]
+    if not data:
+        message = "question with id {} is not found".format(question_id)
+        return jsonify({"message": message}), 404
+    return make_response(jsonify({
+        "message": "ok",
+        "question": data
+    }), 200)
 
 
 @question.route("/questions/edit/<int:question_id>", methods=['PUT'])
