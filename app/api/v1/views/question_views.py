@@ -1,4 +1,5 @@
 from flask import request, jsonify, make_response, Blueprint
+from app.api.v1.models.question_model import my_db
 from app.api.v1.models.question_model import QuestionModel
 
 
@@ -82,11 +83,13 @@ def update_question(question_id):
 @question.route("/questions/delete/<int:question_id>", methods=['DELETE'])
 def delete_question(question_id):
     """endpoint for deleting aquestion"""
-    deleted = QuestionModel().delete(question_id)
+    # deleted = QuestionModel().delete(question_id)
+    deleted = [x for x in my_db if x["question_id"] == question_id]
+    msg = "question with id {} is deleted".format(question_id)
     if deleted:
         return make_response(jsonify({
             "message": "ok",
-            "description": deleted
+            "description": msg
         }), 200)
     message = "The question with id {} is not found".format(question_id)
     return jsonify({"message": message}), 404

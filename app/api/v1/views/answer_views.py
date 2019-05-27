@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, make_response, request
 from app.api.v1.models.answer_model import AnswerModel
 from app.api.v1.models.question_model import QuestionModel
+from app.api.v1.models.answer_model import second_db
+from app.api.v1.models.question_model import my_db
 
 answer = Blueprint('answer', __name__, url_prefix='/api/v1')
 
@@ -8,7 +10,7 @@ answer = Blueprint('answer', __name__, url_prefix='/api/v1')
 @answer.route("/answers/<int:question_id>", methods=['POST'])
 def post_answer(question_id):
     """endpoint for posting answer"""
-    qtn_id = QuestionModel().get_qtn_by_id(question_id)
+    qtn_id = [answer for answer in my_db if answer["question_id"] == question_id]
     if not qtn_id:
         return jsonify({"message": "question id is not found"}), 404
     req = request.get_json()
@@ -27,7 +29,8 @@ def post_answer(question_id):
 
     detail = AnswerModel(**ans_detail)
     # check if answer exists
-    if detail.check_answer(ans_detail["description"]):
+    chec = [answer for answer in second_db if answer["description"] == ans_detail["description"]]
+    if chec:
         return jsonify({"message": "answer exists"}), 409
     # save answer
     ans = detail.save_answer(question_id)
@@ -83,7 +86,7 @@ def vote_answer(answer_id):
 @answer.route("/question/answer/<int:question_id>", methods=['GET'])
 def get_question_and_answer(question_id):
     """endpoint for geting question and answer"""
-    ans = AnswerModel().get_qtn_and_ans(question_id)
+    ans = [y for y in second_db if y["question_id"] == question_id]
     qtn = QuestionModel().get_one_qtn(question_id)
     if ans and qtn:
         return make_response(jsonify({

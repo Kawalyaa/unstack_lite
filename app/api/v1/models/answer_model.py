@@ -29,11 +29,6 @@ class AnswerModel:
         self.second_db.append(answer)
         return self.second_db
 
-    def check_answer(self, my_answer):
-        for answer in self.second_db:
-            if answer["description"] == my_answer:
-                return "answer exists"
-
     def edit_ans(self, answer_id, answered_by):
         req = request.get_json()
         for answer in self.second_db:
@@ -56,11 +51,6 @@ class AnswerModel:
                 if reque not in [1, -1]:
                     return "bad vote"
                 answer["votes"] += reque
-                return answer
-
-    def get_qtn_and_ans(self, question_id):
-        for answer in self.second_db:
-            if answer["question_id"] == question_id:
                 return answer
 
     def delete_qtn_and_ans(self, question_id):
